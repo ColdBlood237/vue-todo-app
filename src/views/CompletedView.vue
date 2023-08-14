@@ -1,6 +1,6 @@
 <template>
   <h2>Completed Tasks</h2>
-  <TasksList :tasks="completedTasks" />
+  <TasksList @clickDelete="deleteTask" :tasks="completedTasks" />
 </template>
 
 <script>
@@ -15,6 +15,10 @@ export default {
     const completedTasks = computed(() => {
       return tasks.value.filter((task) => task.completed);
     });
+
+    function deleteTask(taskID) {
+      tasks.value = tasks.value.filter((task) => task.id !== taskID);
+    }
 
     onMounted(() => {
       if (!localStorage.getItem("tasks")) {
@@ -31,7 +35,7 @@ export default {
       { deep: true }
     );
 
-    return { completedTasks };
+    return { completedTasks, deleteTask };
   },
 };
 </script>

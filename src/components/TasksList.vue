@@ -23,7 +23,6 @@
             <div>
               <!-- <v-btn variant="text">edit</v-btn> -->
               <EditTaskModal :task="task" />
-              <v-btn variant="text">arch</v-btn>
               <v-btn @click="$emit('clickDelete', task.id)" variant="text"
                 >del</v-btn
               >
