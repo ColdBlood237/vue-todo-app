@@ -1,6 +1,11 @@
 <template>
   <v-sheet width="300" class="mx-auto task-form">
-    <v-form @submit.prevent="emitEvent">
+    <v-form
+      @submit.prevent="
+        $emit(`submitForm`, task);
+        task = '';
+      "
+    >
       <v-text-field v-model="task" :rules="rules" label="Task"></v-text-field>
       <v-btn type="submit" block class="mt-2">Submit</v-btn>
     </v-form>
@@ -35,11 +40,7 @@ export default {
       },
     ]);
 
-    function emitEvent(e) {
-      this.$emit("submit", e);
-    }
-
-    return { expand, task, rules, emitEvent };
+    return { expand, task, rules };
   },
 };
 </script>
