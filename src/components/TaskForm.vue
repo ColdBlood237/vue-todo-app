@@ -1,5 +1,5 @@
 <template>
-  <v-sheet width="300" class="mx-auto task-form">
+  <v-sheet width="300" class="mx-auto">
     <v-form
       @submit.prevent="
         $emit(`submitForm`, task);
@@ -14,22 +14,8 @@
 
 <script>
 import { ref } from "vue";
+
 export default {
-  //   data: () => ({
-  //     expand: false,
-  //     task: "",
-  //     rules: [
-  //       (value) => {
-  //         if (value) return true;
-  //         return "You must enter something.";
-  //       },
-  //     ],
-  //   }),
-  //   methods: {
-  //     emitEvent(e) {
-  //       this.$emit("submit", e);
-  //     },
-  //   },
   setup() {
     const expand = ref(false);
     const task = ref("");
@@ -45,8 +31,4 @@ export default {
 };
 </script>
 
-<style>
-.task-form {
-  display: block;
-}
-</style>
+<style></style>
