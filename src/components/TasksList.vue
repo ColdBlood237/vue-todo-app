@@ -15,9 +15,9 @@
 
           <div class="d-flex justify-space-between align-center">
             <v-list-item-title>
-              <span :class="task.completed ? 'text-grey' : 'text-primary'">{{
-                task.title
-              }}</span>
+              <span :class="task.completed ? 'text-grey' : 'text-primary'"
+                >{{ task.title }} - {{ task.user }}</span
+              >
             </v-list-item-title>
 
             <div>

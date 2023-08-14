@@ -7,7 +7,7 @@
   >
     <v-list-item
       prepend-avatar="https://randomuser.me/api/portraits/men/85.jpg"
-      title="Anonymous"
+      :title="user ? user : 'Anonymous'"
       nav
     >
       <template v-slot:append>
@@ -36,26 +36,38 @@
           value="completed"
         ></v-list-item>
       </router-link>
-      <router-link :to="{ name: 'login' }">
+      <router-link v-if="!user" :to="{ name: 'login' }">
         <v-list-item
           prepend-icon="mdi-login-variant"
           title="Log in"
           value="login"
         ></v-list-item>
       </router-link>
+      <v-btn @click="logOut" variant="text" v-else>Log out</v-btn>
     </v-list>
   </v-navigation-drawer>
 </template>
 
 <script>
+import { onMounted, ref } from "vue";
+
 export default {
   name: "Drawer",
+  setup() {
+    const drawer = ref(true);
+    const rail = ref(true);
+    const user = ref(null);
 
-  data() {
-    return {
-      drawer: true,
-      rail: true,
-    };
+    function logOut() {
+      localStorage.removeItem("user");
+      user.value = null;
+    }
+
+    onMounted(() => {
+      user.value = localStorage.getItem("user");
+    });
+
+    return { drawer, rail, user, logOut };
   },
 };
 </script>

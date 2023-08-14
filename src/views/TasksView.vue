@@ -11,9 +11,11 @@ import TaskForm from "../components/TaskForm.vue";
 import TasksList from "../components/TasksList.vue";
 
 export default {
+  name: "TaskView",
   components: { TaskForm, TasksList },
   setup() {
     const tasks = ref([""]);
+    const user = ref(null);
 
     function addTask(task) {
       tasks.value.push({
@@ -21,6 +23,7 @@ export default {
         title: task,
         completed: false,
         archived: false,
+        user: user.value ? user.value : "Anonymous",
       });
     }
 
@@ -33,6 +36,7 @@ export default {
         localStorage.setItem("tasks", JSON.stringify([]));
       }
       tasks.value = JSON.parse(localStorage.getItem("tasks"));
+      user.value = localStorage.getItem("user");
     });
 
     watch(
