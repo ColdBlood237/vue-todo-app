@@ -21,7 +21,8 @@
             </v-list-item-title>
 
             <div>
-              <v-btn variant="text">edit</v-btn>
+              <!-- <v-btn variant="text">edit</v-btn> -->
+              <EditTaskModal />
               <v-btn variant="text">arch</v-btn>
               <v-btn @click="$emit('clickDelete', task.id)" variant="text"
                 >del</v-btn
@@ -41,12 +42,18 @@
 </template>
 
 <script>
+import { ref } from "vue";
+import EditTaskModal from "./EditTaskModal.vue";
+
 export default {
   props: ["tasks"],
+  components: { EditTaskModal },
+
   setup({ tasks }) {
     console.log(tasks);
+    const showInputfield = ref(false);
 
-    return {};
+    return { showInputfield };
   },
 };
 </script>
