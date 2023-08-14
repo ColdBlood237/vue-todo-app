@@ -9,9 +9,9 @@
       </v-card-title>
       <v-card-text>
         <v-container>
-          <v-form @submit.prevent>
+          <v-form @submit.prevent="editTask">
             <v-text-field
-              v-model="task"
+              v-model="newTask"
               :rules="rules"
               label="Task"
             ></v-text-field>
@@ -30,12 +30,19 @@
 </template>
 
 <script>
-import { ref } from "vue";
+import { ref, watch } from "vue";
 export default {
-  setup() {
+  props: ["task"],
+  setup({ task }) {
     const dialog = ref(false);
+    const newTask = ref(task.title);
 
-    return { dialog };
+    function editTask() {
+      task.title = newTask.value;
+      dialog.value = false;
+    }
+
+    return { dialog, newTask, editTask };
   },
 };
 </script>
