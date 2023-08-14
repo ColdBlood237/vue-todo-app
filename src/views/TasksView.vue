@@ -1,11 +1,11 @@
 <template>
   <h2>Tasks</h2>
-  <TasksList @clickDelete="deleteTask" :tasks="tasks" />
+  <TasksList @clickDelete="deleteTask" :tasks="uncompletedTasks" />
   <TaskForm @submitForm="addTask" />
 </template>
 
 <script>
-import { onMounted, ref, watch } from "vue";
+import { computed, onMounted, ref, watch } from "vue";
 import uniqid from "uniqid";
 import TaskForm from "../components/TaskForm.vue";
 import TasksList from "../components/TasksList.vue";
@@ -43,7 +43,11 @@ export default {
       { deep: true }
     );
 
-    return { tasks, addTask, deleteTask };
+    const uncompletedTasks = computed(() => {
+      return tasks.value.filter((task) => !task.completed);
+    });
+
+    return { uncompletedTasks, addTask, deleteTask };
   },
 };
 </script>

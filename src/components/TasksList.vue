@@ -48,13 +48,7 @@ import EditTaskModal from "./EditTaskModal.vue";
 export default {
   props: ["tasks"],
   components: { EditTaskModal },
-
-  setup({ tasks }) {
-    console.log(tasks);
-    const showInputfield = ref(false);
-
-    return { showInputfield };
-  },
+  setup({ tasks }) {},
 };
 </script>
 
