@@ -23,7 +23,9 @@
             <div>
               <v-btn variant="text">edit</v-btn>
               <v-btn variant="text">arch</v-btn>
-              <v-btn variant="text">del</v-btn>
+              <v-btn @click="$emit('clickDelete', task.id)" variant="text"
+                >del</v-btn
+              >
             </div>
           </div>
 
@@ -41,8 +43,9 @@
 <script>
 export default {
   props: ["tasks"],
-  setup(props) {
-    console.log(props.tasks);
+  setup({ tasks }) {
+    console.log(tasks);
+
     return {};
   },
 };

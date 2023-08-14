@@ -1,6 +1,6 @@
 <template>
   <h2>Tasks</h2>
-  <TasksList :tasks="tasks" />
+  <TasksList @clickDelete="deleteTask" :tasks="tasks" />
   <TaskForm @submitForm="addTask" />
 </template>
 
@@ -22,7 +22,10 @@ export default {
         completed: false,
         archived: false,
       });
-      localStorage.setItem("tasks", JSON.stringify(tasks.value));
+    }
+
+    function deleteTask(taskID) {
+      tasks.value = tasks.value.filter((task) => task.id !== taskID);
     }
 
     onMounted(() => {
@@ -32,7 +35,15 @@ export default {
       tasks.value = JSON.parse(localStorage.getItem("tasks"));
     });
 
-    return { tasks, addTask };
+    watch(
+      tasks,
+      () => {
+        localStorage.setItem("tasks", JSON.stringify(tasks.value));
+      },
+      { deep: true }
+    );
+
+    return { tasks, addTask, deleteTask };
   },
 };
 </script>
