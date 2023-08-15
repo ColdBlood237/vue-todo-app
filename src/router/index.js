@@ -3,6 +3,7 @@ import TasksView from "../views/TasksView.vue";
 import LoginView from "../views/LoginView.vue";
 import CompletedView from "../views/CompletedView.vue";
 import NotFoundView from "../views/NotFoundView.vue";
+import AlboView from "../views/AlboView.vue";
 
 const routes = [
   {
@@ -18,6 +19,11 @@ const routes = [
     path: "/completed",
     name: "completed",
     component: CompletedView,
+  },
+  {
+    path: "/albo",
+    name: "albo",
+    component: AlboView,
   },
   {
     path: "/login",

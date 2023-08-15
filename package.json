@@ -10,9 +10,11 @@
     "@jamescoyle/vue-icon": "^0.1.2",
     "@mdi/font": "^7.2.96",
     "@mdi/js": "^7.2.96",
+    "axios": "^1.4.0",
     "core-js": "^3.8.3",
     "uniqid": "^5.4.0",
     "vue": "^3.2.13",
+    "vue-axios": "^3.5.2",
     "vue-router": "^4.0.3",
     "vuetify": "^3.3.12"
   },

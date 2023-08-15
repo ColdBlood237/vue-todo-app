@@ -36,6 +36,13 @@
           value="completed"
         ></v-list-item>
       </router-link>
+      <router-link :to="{ name: 'albo' }">
+        <v-list-item
+          prepend-icon="mdi-archive"
+          title="Albo"
+          value="albo"
+        ></v-list-item>
+      </router-link>
       <router-link v-if="!user" :to="{ name: 'login' }">
         <v-list-item
           prepend-icon="mdi-login-variant"
