@@ -1,6 +1,15 @@
 <template>
   <h2>Completed Tasks</h2>
-  <TasksList @clickDelete="deleteTask" :tasks="completedTasks" />
+  <v-select
+    v-model="userSelected"
+    :items="users"
+    density="compact"
+    label="Filter by user"
+  ></v-select>
+  <TasksList
+    @clickDelete="deleteTask"
+    :tasks="userTasks.length > 0 ? userTasks : completedTasks"
+  />
 </template>
 
 <script>
@@ -11,9 +20,26 @@ export default {
   components: { TasksList },
   setup() {
     const tasks = ref([]);
+    const userSelected = ref("");
 
     const completedTasks = computed(() => {
       return tasks.value.filter((task) => task.completed);
+    });
+
+    const users = computed(() => {
+      let users = [];
+      completedTasks.value.forEach((task) => {
+        if (!users.includes(task.user)) {
+          users.push(task.user);
+        }
+      });
+      return users;
+    });
+
+    const userTasks = computed(() => {
+      return completedTasks.value.filter(
+        (task) => task.user === userSelected.value
+      );
     });
 
     function deleteTask(taskID) {
@@ -35,7 +61,7 @@ export default {
       { deep: true }
     );
 
-    return { completedTasks, deleteTask };
+    return { completedTasks, userSelected, userTasks, users, deleteTask };
   },
 };
 </script>

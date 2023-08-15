@@ -15,7 +15,6 @@ export default {
   components: { TaskForm, TasksList },
   setup() {
     const tasks = ref([""]);
-    const user = ref(null);
 
     function addTask(task) {
       tasks.value.push({
@@ -23,7 +22,9 @@ export default {
         title: task,
         completed: false,
         archived: false,
-        user: user.value ? user.value : "Anonymous",
+        user: localStorage.getItem("user")
+          ? localStorage.getItem("user")
+          : "Anonymous",
       });
     }
 
@@ -36,7 +37,6 @@ export default {
         localStorage.setItem("tasks", JSON.stringify([]));
       }
       tasks.value = JSON.parse(localStorage.getItem("tasks"));
-      user.value = localStorage.getItem("user");
     });
 
     watch(
