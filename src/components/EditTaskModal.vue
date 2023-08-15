@@ -1,7 +1,9 @@
 <template>
   <v-dialog v-model="dialog" persistent width="1024">
     <template v-slot:activator="{ props }">
-      <v-btn variant="text" v-bind="props"> edit </v-btn>
+      <v-btn variant="plain" v-bind="props">
+        <v-icon>mdi-file-edit</v-icon>
+      </v-btn>
     </template>
     <v-card>
       <v-card-title>
@@ -9,13 +11,15 @@
       </v-card-title>
       <v-card-text>
         <v-container>
-          <v-form @submit.prevent="editTask">
+          <v-form v-model="isFormValid" @submit.prevent="editTask">
             <v-text-field
               v-model="newTask"
               :rules="rules"
               label="Task"
             ></v-text-field>
-            <v-btn type="submit" block class="mt-2">Submit</v-btn>
+            <v-btn :disabled="!isFormValid" type="submit" block class="mt-2"
+              >Submit</v-btn
+            >
           </v-form>
         </v-container>
       </v-card-text>
@@ -34,17 +38,23 @@ import { ref, watch } from "vue";
 export default {
   props: ["task"],
   setup({ task }) {
+    const isFormValid = ref(false);
     const dialog = ref(false);
     const newTask = ref(task.title);
+
+    const rules = ref([
+      (value) => {
+        if (value) return true;
+        return "You must enter something.";
+      },
+    ]);
 
     function editTask() {
       task.title = newTask.value;
       dialog.value = false;
     }
 
-    return { dialog, newTask, editTask };
+    return { dialog, newTask, editTask, isFormValid, rules };
   },
 };
 </script>
-
-<style></style>

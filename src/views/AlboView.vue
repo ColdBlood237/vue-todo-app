@@ -1,16 +1,32 @@
 <template>
-  <h1>Albo</h1>
-  <div v-if="comic">
-    <p>day: {{ comic.day }}</p>
-    <p>month: {{ comic.month }}</p>
-    <p>year: {{ comic.year }}</p>
-    <p>num: {{ comic.num }}</p>
-    <p>title: {{ comic.safe_title }}</p>
+  <h2 class="mb-4">Albo</h2>
+  <div class="d-flex flex-column align-start px-16" v-if="comic">
+    <p>
+      day: <span>{{ comic.day }}</span>
+    </p>
+    <p>
+      month: <span>{{ comic.month }}</span>
+    </p>
+    <p>
+      year: <span>{{ comic.year }}</span>
+    </p>
+    <p>
+      num: <span>{{ comic.num }}</span>
+    </p>
+    <p>
+      title: <span>{{ comic.safe_title }}</span>
+    </p>
     <p>
       image link: <a :href="comic.img">{{ comic.img }}</a>
     </p>
-    <button @click="page--">precedent page</button>
-    <button @click="page++">next page</button>
+    <div class="buttons mt-4">
+      <v-btn icon="mdi-step-backward" size="small" @click="page--"></v-btn>
+      <v-btn icon="mdi-step-forward" size="small" @click="page++"></v-btn>
+    </div>
+  </div>
+
+  <div v-else class="text-center">
+    <v-progress-circular indeterminate color="primary"></v-progress-circular>
   </div>
   <div v-if="error">{{ error }}</div>
 </template>
@@ -50,4 +66,21 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+.d-flex {
+  gap: 12px;
+}
+
+p {
+  font-weight: 600;
+}
+
+span {
+  font-weight: 400;
+}
+
+.buttons {
+  display: flex;
+  gap: 10px;
+}
+</style>

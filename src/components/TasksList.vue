@@ -21,10 +21,9 @@
             </v-list-item-title>
 
             <div>
-              <!-- <v-btn variant="text">edit</v-btn> -->
               <EditTaskModal :task="task" />
-              <v-btn @click="$emit('clickDelete', task.id)" variant="text"
-                >del</v-btn
+              <v-btn @click="$emit('clickDelete', task.id)" variant="plain"
+                ><v-icon>mdi-delete</v-icon></v-btn
               >
             </div>
           </div>

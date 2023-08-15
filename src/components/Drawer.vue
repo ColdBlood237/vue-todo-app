@@ -6,7 +6,11 @@
     @click="rail = false"
   >
     <v-list-item
-      prepend-avatar="https://randomuser.me/api/portraits/men/85.jpg"
+      :prepend-avatar="
+        user
+          ? 'https://ui-avatars.com/api/?name=' + user
+          : 'https://ui-avatars.com/api/?name=?'
+      "
       :title="user ? user : 'Anonymous'"
       nav
     >
@@ -21,36 +25,61 @@
 
     <v-divider></v-divider>
 
-    <v-list density="compact" nav>
-      <router-link :to="{ name: 'tasks' }">
+    <v-list class="d-flex flex-column mt-4" density="compact" nav>
+      <router-link
+        style="text-decoration: none; color: inherit"
+        class="mb-4"
+        :to="{ name: 'tasks' }"
+      >
         <v-list-item
           prepend-icon="mdi-format-list-bulleted"
-          title="Tasks"
+          title="Tasks to do"
           value="tasks"
-        ></v-list-item>
+        >
+        </v-list-item>
       </router-link>
-      <router-link :to="{ name: 'completed' }">
+      <router-link
+        style="text-decoration: none; color: inherit"
+        class="mb-4"
+        :to="{ name: 'completed' }"
+      >
         <v-list-item
           prepend-icon="mdi-archive"
-          title="Completed"
+          title="Tasks completed"
           value="completed"
         ></v-list-item>
       </router-link>
-      <router-link :to="{ name: 'albo' }">
+      <router-link
+        style="text-decoration: none; color: inherit"
+        class="mb-4"
+        :to="{ name: 'albo' }"
+      >
         <v-list-item
-          prepend-icon="mdi-archive"
+          prepend-icon="mdi-thought-bubble-outline "
           title="Albo"
           value="albo"
         ></v-list-item>
       </router-link>
-      <router-link v-if="!user" :to="{ name: 'login' }">
+      <router-link
+        style="text-decoration: none; color: inherit"
+        class="mb-4"
+        v-if="!user"
+        :to="{ name: 'login' }"
+      >
         <v-list-item
           prepend-icon="mdi-login-variant"
           title="Log in"
           value="login"
         ></v-list-item>
       </router-link>
-      <v-btn @click="logOut" variant="text" v-else>Log out</v-btn>
+
+      <v-list-item
+        v-else
+        @click="logOut"
+        prepend-icon="mdi-logout-variant"
+        title="Log out"
+        value="logout"
+      ></v-list-item>
     </v-list>
   </v-navigation-drawer>
 </template>
@@ -79,4 +108,8 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.logout {
+  padding: 100 auto;
+}
+</style>

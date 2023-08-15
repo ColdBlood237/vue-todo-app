@@ -8,7 +8,6 @@
   },
   "dependencies": {
     "@jamescoyle/vue-icon": "^0.1.2",
-    "@mdi/font": "^7.2.96",
     "@mdi/js": "^7.2.96",
     "axios": "^1.4.0",
     "core-js": "^3.8.3",
@@ -19,6 +18,7 @@
     "vuetify": "^3.3.12"
   },
   "devDependencies": {
+    "@mdi/font": "^7.2.96",
     "@vue/cli-plugin-babel": "~5.0.0",
     "@vue/cli-plugin-router": "~5.0.0",
     "@vue/cli-service": "~5.0.0"

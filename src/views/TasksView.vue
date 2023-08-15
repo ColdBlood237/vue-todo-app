@@ -1,5 +1,5 @@
 <template>
-  <h2>Tasks</h2>
+  <h2 class="mb-4">Tasks</h2>
   <TasksList @clickDelete="deleteTask" :tasks="uncompletedTasks" />
   <TaskForm @submitForm="addTask" />
 </template>

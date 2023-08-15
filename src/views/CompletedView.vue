@@ -1,5 +1,5 @@
 <template>
-  <h2>Completed Tasks</h2>
+  <h2 class="mb-4">Completed Tasks</h2>
   <v-text-field v-model="search" label="Search"></v-text-field>
   <v-select
     v-model="userSelected"

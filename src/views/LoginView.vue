@@ -1,5 +1,5 @@
 <template>
-  <h1>Log In</h1>
+  <h2 class="mb-4">Log In</h2>
   <v-sheet width="300" class="mx-auto">
     <v-form @submit.prevent="login">
       <v-text-field
