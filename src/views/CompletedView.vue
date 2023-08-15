@@ -1,5 +1,6 @@
 <template>
   <h2>Completed Tasks</h2>
+  <v-text-field v-model="search" label="Search"></v-text-field>
   <v-select
     v-model="userSelected"
     :items="users"
@@ -8,7 +9,11 @@
   ></v-select>
   <TasksList
     @clickDelete="deleteTask"
-    :tasks="userTasks.length > 0 ? userTasks : completedTasks"
+    :tasks="
+      userSelected !== '*no filter*' || search !== ''
+        ? matchingTasks
+        : completedTasks
+    "
   />
 </template>
 
@@ -20,7 +25,8 @@ export default {
   components: { TasksList },
   setup() {
     const tasks = ref([]);
-    const userSelected = ref("");
+    const userSelected = ref("*no filter*");
+    const search = ref("");
 
     const completedTasks = computed(() => {
       return tasks.value.filter((task) => task.completed);
@@ -33,6 +39,7 @@ export default {
           users.push(task.user);
         }
       });
+      users.push("*no filter*");
       return users;
     });
 
@@ -41,6 +48,27 @@ export default {
         (task) => task.user === userSelected.value
       );
     });
+
+    const matchingTasks = computed(() => {
+      let matches = [];
+      console.log(search.value);
+      matches = completedTasks.value.filter((task) => {
+        return (
+          task.title.toLowerCase().includes(search.value.toLowerCase()) ||
+          task.user.toLowerCase().includes(search.value.toLowerCase())
+        );
+      });
+      console.log(matches);
+      if (userSelected.value !== "*no filter*") {
+        matches = matches.filter((match) => {
+          return match.user === userSelected.value;
+        });
+      }
+
+      return matches;
+    });
+
+    watch(matchingTasks, () => {});
 
     function deleteTask(taskID) {
       tasks.value = tasks.value.filter((task) => task.id !== taskID);
@@ -61,7 +89,15 @@ export default {
       { deep: true }
     );
 
-    return { completedTasks, userSelected, userTasks, users, deleteTask };
+    return {
+      completedTasks,
+      userSelected,
+      userTasks,
+      users,
+      search,
+      matchingTasks,
+      deleteTask,
+    };
   },
 };
 </script>
