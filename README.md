@@ -3,7 +3,7 @@ todo-app
 
 This is a very basic todo list app created with Vue and Vuetify that stores the data in the local storage.
 
-live preview: 
+live preview: https://vue-todo-app-eta-sable.vercel.app/tasks
 
 Features
 --------
