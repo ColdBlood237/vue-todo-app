@@ -1,19 +1,24 @@
-# vue-todo-app
+todo-app
+==============
 
-## Project setup
-```
-npm install
-```
+This is a very basic todo list app created with Vue and Vuetify that stores the data in the local storage.
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+live preview: 
 
-### Compiles and minifies for production
-```
-npm run build
-```
+Features
+--------
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+- Search bar
+- CRUD operations tasks
+
+Installation
+------------
+
+Install the app on local by running:
+        npm run serve
+
+Support
+-------
+
+If you are having issues, please let me know.
+I have a mailing list located at: petngalan@gmail.com
